@@ -7309,9 +7309,9 @@ const questionBank = [
         }
     },
 
-    // 6. التناظر
+    // 6. التماثل
     {
-        unit: "التناظر",
+        unit: "التماثل",
         create: () => {
             const type = Math.random();
             if (type < 0.5) {
@@ -7322,11 +7322,11 @@ const questionBank = [
                     {name: 'دائرة', axes: '∞', svg: '<circle cx="110" cy="70" r="40" fill="none" stroke="white" stroke-width="3"/>'}
                 ];
                 const s = shapes[Math.floor(Math.random()*shapes.length)];
-                const q = `كم عدد محاور التناظر الشكل التالي (${s.name})؟`;
+                const q = `كم عدد محاور التماثل الشكل التالي (${s.name})؟`;
                 const ans = `${s.axes}`;
                 const wrong = s.axes === '∞' ? ['4','2','3'] : [`${typeof s.axes === 'number' ? s.axes+1 : s.axes}`, `${Math.max(1, (typeof s.axes === 'number' ? s.axes-1 : 1))}`, `${(typeof s.axes === 'number' ? s.axes+2 : 4)}`];
                 const svg = `<svg viewBox="0 0 240 140" width="100%" height="120px" style="background:#222; border-radius:8px;">${s.svg}</svg>`;
-                return { q, ans, subTopic: "محاور التناظر", wrong, svg };
+                return { q, ans, subTopic: "محاور التماثل", wrong, svg };
             } else {
                 const shapes = [
                     {name:'مربع', order:4, svg:'<rect x="50" y="20" width="80" height="80" fill="none" stroke="white" stroke-width="3"/>'},
@@ -7334,11 +7334,11 @@ const questionBank = [
                     {name:'مثلث متساوي الأضلاع', order:3, svg:'<polygon points="120,30 60,110 180,110" fill="none" stroke="white" stroke-width="3"/>'}
                 ];
                 const s = shapes[Math.floor(Math.random()*shapes.length)];
-                const q = `ما ترتيب التناظر الدوراني للشكل ${s.name} (كم مرة يتطابق أثناء الدوران 360°)؟`;
+                const q = `ما عدد محاور التماثل ${s.name} ؟`;
                 const ans = `${s.order}`;
                 const wrong = [`${s.order+1}`, `${Math.max(1, s.order-1)}`, `${s.order+2}`];
                 const svg = `<svg viewBox="0 0 240 140" width="100%" height="120px" style="background:#222; border-radius:8px;">${s.svg}</svg>`;
-                return { q, ans, subTopic: "تناظر دوراني", wrong, svg };
+                return { q, ans, subTopic: "محور التماثل", wrong, svg };
             }
         }
     },
