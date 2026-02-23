@@ -7279,45 +7279,56 @@ const questionBank = [
             }
         }
     },
+{
+    unit: "الأعداد العشرية",
+    create: () => {
+        const num1 = (Math.random() * 10).toFixed(1);
+        const num2 = (Math.random() * 10).toFixed(1);
+        const isAddition = Math.random() > 0.5;
+        const q = isAddition ? `جد ناتج: ${num1} + ${num2}` : `جد ناتج: ${num1} - ${num2}`;
+        const ans = isAddition ? (parseFloat(num1) + parseFloat(num2)).toFixed(1) : (parseFloat(num1) - parseFloat(num2)).toFixed(1);
+        return { q, ans, subTopic: "جمع وطرح العشري", wrong: [(parseFloat(ans)+1).toFixed(1), (parseFloat(ans)-0.5).toFixed(1), (parseFloat(ans)*2).toFixed(1)] };
+    }
+},
 
-    
     // 5. زوايا المثلث
-    {
-        unit: "زوايا المثلث",
-        create: () => {
-            const type = Math.random();
-            if (type < 0.33) {
-                const a = Math.floor(Math.random()*60)+20; 
-                const b = Math.floor(Math.random()*(100-a-20))+10; 
-                const c = 180 - a - b;
-                return { 
-                    q: `مثلث زواياه $${a}^\circ$ و $${b}^\circ$. ما قيمة الزاوية الثالثة؟`, 
-                    ans: `${c}^\circ`, 
-                    subTopic: "مجموع زوايا المثلث", 
-                    wrong: [`${Math.abs(180 - a)}^\circ`, `${Math.max(1, c-5)}^\circ`, `${c+5}^\circ`] 
-                };
-            } else if (type < 0.66) {
-                const baseAngle = Math.floor(Math.random()*40)+20; 
-                const vertex = 180 - 2*baseAngle;
-                return { 
-                    q: `مثلث متساوي الساقين قياس زاويتي القاعدة $${baseAngle}^\circ$. ما قياس الزاوية الرأسية؟`, 
-                    ans: `${vertex}^\circ`, 
-                    subTopic: "مثلث متساوي الساقين", 
-                    wrong: [`${baseAngle}^\circ`, `${Math.abs(vertex-10)}^\circ`, `${vertex+10}^\circ`] 
-                };
-            } else {
-                const a = Math.floor(Math.random()*60)+20;
-                const b = Math.floor(Math.random()*60)+20;
-                const exterior = a + b; 
-                return { 
-                    q: `في مثلث، إذا كانت زاويتان داخليتان $${a}^\circ$ و $${b}^\circ$، ما قياس الزاوية الخارجية المواجهة لهما؟`, 
-                    ans: `${exterior}^\circ`, 
-                    subTopic: "زاوية خارجية", 
-                    wrong: [`${Math.abs(180 - exterior)}^\circ`, `${Math.max(1, exterior-10)}^\circ`, `${exterior+10}^\circ`] 
-                };
-            }
+{
+    unit: "زوايا المثلث",
+    create: () => {
+        const type = Math.random();
+        if (type < 0.33) {
+            const a = Math.floor(Math.random()*60)+20; 
+            const b = Math.floor(Math.random()*(100-a-20))+10; 
+            const c = 180 - a - b;
+            return { 
+                q: `مثلث زواياه ${a}° و ${b}°. ما قيمة الزاوية الثالثة؟`, 
+                ans: `${c}°`, 
+                subTopic: "مجموع زوايا المثلث", 
+                wrong: [`${Math.abs(180 - a)}°`, `${Math.max(1, c-5)}°`, `${c+5}°`] 
+            };
+        } else if (type < 0.66) {
+            const baseAngle = Math.floor(Math.random()*40)+20; 
+            const vertex = 180 - 2*baseAngle;
+            return { 
+                q: `مثلث متساوي الساقين قياس زاويتي القاعدة ${baseAngle}°. ما قياس الزاوية الرأسية؟`, 
+                ans: `${vertex}°`, 
+                subTopic: "مثلث متساوي الساقين", 
+                wrong: [`${baseAngle}°`, `${Math.abs(vertex-10)}°`, `${vertex+10}°`] 
+            };
+        } else {
+            const a = Math.floor(Math.random()*60)+20;
+            const b = Math.floor(Math.random()*60)+20;
+            const exterior = a + b; 
+            return { 
+                q: `في مثلث، إذا كانت زاويتان داخليتان ${a}° و ${b}°، ما قياس الزاوية الخارجية المواجهة لهما؟`, 
+                ans: `${exterior}°`, 
+                subTopic: "زاوية خارجية", 
+                wrong: [`${Math.abs(180 - exterior)}°`, `${Math.max(1, exterior-10)}°`, `${exterior+10}°`] 
+            };
         }
-    },
+    }
+},
+
 // 6. التماثل
     {
         unit: "التماثل",
