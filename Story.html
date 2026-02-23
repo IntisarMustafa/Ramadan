@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قصة اللعبة - الراعي الذكي</title>
+    
+    <!-- خطوط جوجل: خط أميري للعناوين وخط كايرو للنصوص -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة Tailwind CSS للتصميم السريع والمتجاوب -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- إعدادات Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        amiri: ['Amiri', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'customFloat 6s ease-in-out infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #701a75 80%, #9d174d 100%);
+            margin: 0;
+            overflow-x: hidden;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .islamic-bg {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fef08a' stroke-width='1' stroke-opacity='0.08'%3E%3Cpath d='M40 0l40 40-40 40L0 40z'/%3E%3Cpath d='M20 20h40v40H20z'/%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .stars-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 50px 160px, #fef08a, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 130px 80px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.6;
+            z-index: 0;
+            animation: twinkle 4s infinite alternate;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 
+                        inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .story-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .story-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            border-color: rgba(253, 224, 71, 0.4);
+        }
+
+        .gold-text-gradient {
+            background: linear-gradient(to bottom, #ffffff 0%, #fef08a 25%, #f59e0b 70%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 6px 10px rgba(245, 158, 11, 0.3));
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            100% { opacity: 0.9; transform: scale(1.1); }
+        }
+        @keyframes customSwing {
+            0% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(253,224,71,0.6)); }
+            50% { filter: drop-shadow(0 0 35px rgba(253,224,71,1)); }
+        }
+        @keyframes moonGlowPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(253, 224, 71, 0.7)) drop-shadow(0 0 40px rgba(236, 72, 153, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 40px rgba(253, 224, 71, 0.9)) drop-shadow(0 0 70px rgba(236, 72, 153, 0.6)); transform: scale(1.03); }
+        }
+
+        .lantern-anim {
+            animation: customSwing 4s ease-in-out infinite alternate;
+            transform-origin: top center;
+        }
+        
+        .moon-glow-anim {
+            animation: moonGlowPulse 4s ease-in-out infinite alternate;
+        }
+
+        .glow-anim {
+            animation: glowPulse 2.5s ease-in-out infinite;
+        }
+        
+        .play-btn {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: inline-flex;
+            overflow: hidden;
+            border: 2px solid #6ee7b7;
+            text-decoration: none;
+        }
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-25deg);
+            transition: 0.6s;
+        }
+        .play-btn:hover::before {
+            left: 150%;
+        }
+        .play-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.7);
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 relative min-h-screen">
+    
+    <div class="islamic-bg"></div>
+    <div class="stars-bg"></div>
+
+    <!-- الهلال -->
+    <div class="absolute top-6 left-6 md:top-12 md:left-16 w-24 h-24 md:w-40 md:h-40 z-0 moon-glow-anim pointer-events-none text-yellow-300">
+        <svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="30%" stop-color="#fef08a" />
+                    <stop offset="100%" stop-color="#f59e0b" />
+                </linearGradient>
+            </defs>
+            <path fill="url(#moonGrad)" d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.065-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23-25.53-4.707-51.633-7.15-78.25-7.15C127.271 37.13 0 143.581 0 274.565 0 405.549 127.271 512 283.211 512z"/>
+        </svg>
+    </div>
+
+    <!-- فوانيس -->
+    <div class="absolute top-0 right-4 md:right-24 z-10 lantern-anim">
+        <div class="w-1 h-12 md:h-20 bg-gradient-to-b from-yellow-100 to-yellow-500 mx-auto"></div>
+        <div class="w-12 h-20 md:w-16 md:h-24 text-yellow-300 mx-auto relative -top-1 glow-anim">
+            <svg viewBox="0 0 24 36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1L9 5H15L12 1Z" fill="#fde047"/>
+                <path d="M7 6H17L18 10H6L7 6Z" fill="#ea580c"/>
+                <path d="M5 11H19L17 25H7L5 11Z" fill="rgba(253, 224, 71, 0.25)" stroke="#fef08a" stroke-width="1.5"/>
+                <circle cx="12" cy="18" r="4" fill="#ffffff" class="animate-pulse" style="filter: blur(2px);"/>
+                <path d="M6 26H18L16 30H8L6 26Z" fill="#ea580c"/>
+            </svg>
+        </div>
+    </div>
+
+    <main class="glass-panel rounded-[2.5rem] p-6 md:p-12 max-w-4xl w-full z-20 relative mt-16 md:mt-0">
+        
+        <!-- الترويسة -->
+        <header class="mb-6 relative z-10 text-center">
+            <div class="inline-block bg-white/10 px-6 py-2 rounded-full border border-white/30 shadow-[0_4px_10px_rgba(0,0,0,0.2)] backdrop-blur-md">
+                <h2 class="text-xl md:text-2xl font-bold text-[#7dd3fc] tracking-wider">📜 قصة اللعبة</h2>
+            </div>
+        </header>
+
+        <!-- العنوان الرئيسي -->
+        <div class="mb-10 relative z-10 text-center">
+            <div class="absolute inset-0 bg-yellow-400/10 blur-[50px] rounded-full"></div>
+            <h1 class="font-amiri text-5xl md:text-7xl font-bold mb-2 gold-text-gradient leading-tight relative z-10 drop-shadow-lg">
+                الراعي الذكي 
+            </h1>
+            <h2 class="font-amiri text-4xl md:text-5xl font-bold text-white drop-shadow-[0_4px_6px_rgba(107,33,168,0.8)] relative z-10 mt-2">
+                والخراف الضائعة
+            </h2>
+        </div>
+
+        <!-- أحداث القصة (بطاقات) -->
+        <div class="space-y-4 relative z-10 mb-10">
+            
+            <!-- البطاقة الأولى: بداية القصة -->
+            <div class="story-card rounded-2xl p-5 md:p-6 flex items-start gap-4 md:gap-6 shadow-lg">
+                <div class="text-4xl md:text-5xl shrink-0 animate-bounce-slow">🌪️</div>
+                <div>
+                    <p class="text-lg md:text-xl text-indigo-50 leading-relaxed font-semibold">
+                        ضاعت خمس خراف بسبب العاصفة! يبحث الراعي عنها ويواجه الحيوانات الشرسة فيضربها بالعصا ويبعد الوحوش الشرسة المتجمعة حول الخراف بشعلة النار.
+                    </p>
+                </div>
+            </div>
+
+            <!-- البطاقة الثانية: الغذاء -->
+            <div class="story-card rounded-2xl p-5 md:p-6 flex items-start gap-4 md:gap-6 shadow-lg">
+                <div class="text-4xl md:text-5xl shrink-0">🍯</div>
+                <div>
+                    <p class="text-lg md:text-xl text-indigo-50 leading-relaxed font-semibold">
+                        أثناء رحلة البحث، سيقوم اللاعب بتناول الغذاء من خلايا النحل التي تحتوي العسل اللذيذ لزيادة طاقته!
+                    </p>
+                </div>
+            </div>
+
+            <!-- البطاقة الثالثة: التحذير -->
+            <div class="bg-red-900/40 border border-red-500/50 rounded-2xl p-5 md:p-6 flex items-start gap-4 md:gap-6 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                <div class="text-4xl md:text-5xl shrink-0">⚠️</div>
+                <div>
+                    <h3 class="text-red-300 font-bold text-xl md:text-2xl mb-1">تحذير هام!</h3>
+                    <p class="text-lg md:text-xl text-red-50 leading-relaxed font-semibold">
+                        توجد نسور 🦅 خاطفة تطير على ارتفاع منخفض وتحاول خطف خرافك! احذر منها وابقَ يقظاً.
+                    </p>
+                </div>
+            </div>
+
+            <!-- البطاقة الرابعة: المكافأة -->
+            <div class="bg-yellow-900/40 border border-yellow-500/50 rounded-2xl p-5 md:p-6 flex items-start gap-4 md:gap-6 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+                <div class="text-4xl md:text-5xl shrink-0 animate-pulse-slow">🎁</div>
+                <div>
+                    <h3 class="text-yellow-300 font-bold text-xl md:text-2xl mb-1">صندوق الهدايا</h3>
+                    <p class="text-lg md:text-xl text-yellow-50 leading-relaxed font-semibold">
+                        عند العثور على الصندوق وحل السؤال الحسابي الموجود بداخله ستحصل على هدية رائعة!
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- أزرار التوجيه -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 relative z-10">
+            <a href="game.html" class="play-btn w-full sm:w-auto px-10 py-4 rounded-full text-white text-xl md:text-2xl font-black flex justify-center items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                ابدأ المغامرة الآن
+            </a>
+            <a href="index.html" class="px-8 py-4 rounded-full text-indigo-100 hover:text-white border border-indigo-300/30 hover:bg-white/10 transition-colors text-lg font-bold flex items-center gap-2">
+                عودة للصفحة الرئيسية
+            </a>
+        </div>
+
+    </main>
+
+</body>
+</html>
