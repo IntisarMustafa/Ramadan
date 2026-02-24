@@ -7297,11 +7297,28 @@ const questionBank = [
         const num1 = (Math.random() * 10).toFixed(1);
         const num2 = (Math.random() * 10).toFixed(1);
         const isAddition = Math.random() > 0.5;
-        const q = isAddition ? `جد ناتج: ${num1} + ${num2}` : `جد ناتج: ${num1} - ${num2}`;
-        const ans = isAddition ? (parseFloat(num1) + parseFloat(num2)).toFixed(1) : (parseFloat(num1) - parseFloat(num2)).toFixed(1);
-        return { q, ans, subTopic: "جمع وطرح العشري", wrong: [(parseFloat(ans)+1).toFixed(1), (parseFloat(ans)-0.5).toFixed(1), (parseFloat(ans)*2).toFixed(1)] };
+        
+        // استخدام span مع dir="ltr" لضمان ظهور العملية الحسابية من اليسار لليمين
+        const equation = isAddition ? `${num1} + ${num2}` : `${num1} - ${num2}`;
+        const q = `جد ناتج: <span dir="ltr">${equation}</span>`;
+        
+        const ans = isAddition ? 
+            (parseFloat(num1) + parseFloat(num2)).toFixed(1) : 
+            (parseFloat(num1) - parseFloat(num2)).toFixed(1);
+            
+        return { 
+            q, 
+            ans, 
+            subTopic: "جمع وطرح العشري", 
+            wrong: [
+                (parseFloat(ans) + 1).toFixed(1), 
+                (parseFloat(ans) - 0.5).toFixed(1), 
+                (parseFloat(ans) * 2).toFixed(1)
+            ] 
+        };
     }
 },
+
 
     // 5. زوايا المثلث
 {
